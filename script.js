@@ -24,6 +24,7 @@ const GameBoard = (() => {
       gameBoardGrids[index] = Game.activePlayer.marker;
       // count how many grids are left
       Game.remainingGrid -= 1;
+      console.log("grid left: ", Game.remainingGrid);
       // make the grid non-clickable after it was once clicked
       grid.style.pointerEvents = "none";
 
@@ -34,6 +35,12 @@ const GameBoard = (() => {
       if (!Game.winnerDeclared) {
         if (Game.remainingGrid > 0) {
           Game.nextPlayer();
+          console.log(
+            "next Player is:",
+            Game.activePlayer.name,
+            "Marker is:",
+            Game.activePlayer.marker
+          );
           console.log(gameBoardGrids);
         }
       }
@@ -65,13 +72,14 @@ const Game = (() => {
     [2, 4, 6],
   ];
 
+  //function to change the turn of the player
   nextPlayer = () => {
     activePlayer === player1
       ? (activePlayer = player2)
       : (activePlayer = player1);
-    console.log(activePlayer);
   };
 
+  // function to determine if either player won
   gameWon = () => {
     winningArray.forEach((item) => {
       if (

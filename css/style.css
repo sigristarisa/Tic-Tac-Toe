@@ -1,0 +1,31 @@
+/* Font */
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+header {
+  font-family: "Righteous", cursive;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#gameBoard {
+  width: 602px;
+  height: 602px;
+  background-color: #000000;
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+}
+
+.grid {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+}
+
+/*# sourceMappingURL=style.css.map */
