@@ -20,12 +20,12 @@ const GameBoard = (() => {
     // make the grid clickable
     grid.addEventListener("click", () => {
       grid.classList.add(Game.activePlayer.marker);
-      grid.setAttribute("data", Game.activePlayer.marker);
       gameBoardGrids[index] = Game.activePlayer.marker;
       Game.remainingGrid -= 1;
 
+      grid.style.pointerEvents = "none";
+
       Game.nextPlayer();
-      console.log(activePlayer);
     });
   });
 
@@ -35,10 +35,11 @@ const GameBoard = (() => {
 })();
 
 const Game = (() => {
-  const player1 = createPlayer("Player 1", "o");
-  const player2 = createPlayer("Player 2", "x");
+  const player1 = createPlayer("Player 1", "x");
+  const player2 = createPlayer("Player 2", "o");
 
   let activePlayer = player1;
+  let winnerDeclared = false;
   let remainingGrid = 9;
 
   // winning conditions
@@ -54,16 +55,28 @@ const Game = (() => {
   ];
 
   nextPlayer = () => {
-    this.activePlayer === player1
-      ? (this.activePlayer = player2)
-      : (this.activePlayer = player1);
+    activePlayer === player1
+      ? (activePlayer = player2)
+      : (activePlayer = player1);
+    console.log(activePlayer);
   };
 
-  gameWon = () => {};
+  // gameWon = () => {
+  //   winningArray.forEach((item, index) => {
+  //     if (
+  //       GameBoard.gameBoardGrids[item[0]] === this.activePlayer.marker &&
+  //       GameBoard.gameBoardGrids[item[1]] === this.activePlayer.marker &&
+  //       GameBoard.gameBoardGrids[item[2]] === this.activePlayer.marker
+  //     ) {
+  //       this.winnerDeclared = true;
+  //       console.log("winner!");
+  //     }
+  //   });
 
   return {
     activePlayer,
     remainingGrid,
     nextPlayer,
+    // gameWon,
   };
 })();
