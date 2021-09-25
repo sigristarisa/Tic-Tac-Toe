@@ -11,8 +11,8 @@ const GameBoard = (() => {
 
   const gameBoard = document.getElementById("gameBoard");
 
+  // add a div to each grid
   gameBoardGrids.forEach((element, index) => {
-    // add a div to each grid
     const grid = document.createElement("div");
     grid.className = "grid";
     gameBoard.appendChild(grid);
@@ -20,12 +20,23 @@ const GameBoard = (() => {
     // make the grid clickable
     grid.addEventListener("click", () => {
       grid.classList.add(Game.activePlayer.marker);
+      // add markers of each player into the array
       gameBoardGrids[index] = Game.activePlayer.marker;
+      // count how many grids are left
       Game.remainingGrid -= 1;
-
+      // make the grid non-clickable after it was once clicked
       grid.style.pointerEvents = "none";
 
-      Game.nextPlayer();
+      // check if either player won
+      Game.gameWon();
+
+      //if neither player won, then change the turn of the player
+      if (!Game.winnerDeclared) {
+        if (Game.remainingGrid > 0) {
+          Game.nextPlayer();
+          console.log(gameBoardGrids);
+        }
+      }
     });
   });
 
@@ -61,22 +72,23 @@ const Game = (() => {
     console.log(activePlayer);
   };
 
-  // gameWon = () => {
-  //   winningArray.forEach((item, index) => {
-  //     if (
-  //       GameBoard.gameBoardGrids[item[0]] === this.activePlayer.marker &&
-  //       GameBoard.gameBoardGrids[item[1]] === this.activePlayer.marker &&
-  //       GameBoard.gameBoardGrids[item[2]] === this.activePlayer.marker
-  //     ) {
-  //       this.winnerDeclared = true;
-  //       console.log("winner!");
-  //     }
-  //   });
+  gameWon = () => {
+    winningArray.forEach((item) => {
+      if (
+        GameBoard.gameBoardGrids[item[0]] === activePlayer.marker &&
+        GameBoard.gameBoardGrids[item[1]] === activePlayer.marker &&
+        GameBoard.gameBoardGrids[item[2]] === activePlayer.marker
+      ) {
+        winnerDeclared = true;
+        console.log("winner!");
+      }
+    });
+  };
 
   return {
     activePlayer,
     remainingGrid,
     nextPlayer,
-    // gameWon,
+    gameWon,
   };
 })();
