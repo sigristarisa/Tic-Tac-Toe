@@ -17,6 +17,10 @@ body header {
   color: #08a808;
   font-family: "Righteous", cursive;
 }
+body header h1 {
+  font-size: 50px;
+  margin: 0;
+}
 body #gameBoard {
   width: 460px;
   height: 460px;

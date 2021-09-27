@@ -23,6 +23,11 @@ body {
     text-align: center;
     color: $green;
     font-family: "Righteous", cursive;
+
+    h1 {
+      font-size: 50px;
+      margin: 0;
+    }
   }
 
   #gameBoard {
