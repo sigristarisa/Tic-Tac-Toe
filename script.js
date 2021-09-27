@@ -32,7 +32,7 @@ const GameBoard = (() => {
       Game.gameWon();
 
       //if neither player won, then change the turn of the player
-      if (!Game.winnerDeclared) {
+      if (Game.winnerDeclared) {
         if (Game.remainingGrid > 0) {
           Game.nextPlayer();
           console.log(
