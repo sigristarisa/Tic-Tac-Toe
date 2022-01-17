@@ -93,8 +93,6 @@ const Game = (() => {
 
   return {
     activePlayer,
-    foo,
-    changeUp,
     winnerDeclared,
     remainingGrid,
     nextPlayer,
