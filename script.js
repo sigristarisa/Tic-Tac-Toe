@@ -31,15 +31,8 @@ const GameBoard = (() => {
       Game.gameWon();
 
       //if neither player won, then change the turn of the player
-      // if (Game.winnerDeclared === false) {
-      //   if (Game.remainingGrid > 0) {
       Game.activePlayer = Game.nextPlayer();
-      console.log(
-        "next Player is:",
-        Game.activePlayer.name,
-        "Marker is:",
-        Game.activePlayer.marker
-      );
+      
     });
   });
 
@@ -56,6 +49,9 @@ const Game = (() => {
   let winnerDeclared = false;
   let remainingGrid = 9;
 
+  let playerName = document.querySelector('.player-name'); 
+  let subtext = document.querySelector('.subtext'); 
+
   // winning conditions
   const winningArray = [
     [0, 1, 2],
@@ -70,9 +66,14 @@ const Game = (() => {
 
   //function to change the turn of the player
   nextPlayer = () => {
-    activePlayer === player1
-      ? (activePlayer = player2)
-      : (activePlayer = player1);
+    if (activePlayer === player1) {
+      activePlayer = player2;
+      playerName.innerHTML = "<span>Player 2</span>"
+    }
+      else {
+        activePlayer = player1;
+      playerName.innerHTML = "<span>Player 1</span>"
+      }
     return activePlayer;
   };
 
@@ -85,8 +86,12 @@ const Game = (() => {
         GameBoard.gameBoardGrids[item[2]] === activePlayer.marker
       ) {
         winnerDeclared = true;
-        console.log(activePlayer, "winner!");
-        console.log(winnerDeclared);
+        
+        // console.log(activePlayer, "winner!");
+
+       subtext.innerHTML =  activePlayer.name + "<p>is the winner!</p>";
+
+      ;
       }
     });
   };
@@ -97,5 +102,7 @@ const Game = (() => {
     remainingGrid,
     nextPlayer,
     gameWon,
+    subtext,
   };
+
 })();
